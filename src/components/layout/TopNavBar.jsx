@@ -1,15 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const TopNavBar = () => {
+const TopNavBar = ({ toggleMobileMenu }) => {
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white border-b border-slate-100 px-6 py-3 flex justify-between items-center">
-      <div className="flex items-center gap-10">
+    <nav className="fixed top-0 w-full z-50 bg-white border-b border-slate-100 px-4 sm:px-6 py-3 flex justify-between items-center">
+      <div className="flex items-center gap-4 sm:gap-10">
+        <button 
+          onClick={toggleMobileMenu}
+          className="lg:hidden p-2 -ml-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors active:scale-95"
+        >
+          <span className="material-symbols-outlined text-[24px]">menu</span>
+        </button>
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <span className="material-symbols-outlined text-white text-xl">science</span>
           </div>
-          <span className="text-xl font-extrabold tracking-tight text-slate-900 font-headline">PhysicsFlow</span>
+          <span className="text-xl font-extrabold tracking-tight text-slate-900 font-headline hidden sm:block">PhysicsFlow</span>
         </div>
         
         <div className="hidden md:flex items-center gap-1">
