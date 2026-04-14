@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PhysicsFlow - Mechanics Lesson</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#b6eee2",
+                        "error-dim": "#67040d",
+                        "inverse-on-surface": "#9a9da0",
+                        "surface-container-low": "#eff4f8",
+                        "on-surface": "#2b3438",
+                        "background": "#f8fafc",
+                        "surface-container": "#e8eff3",
+                        "secondary-dim": "#255c53",
+                        "on-error-container": "#6e0a12",
+                        "tertiary-dim": "#5f531a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#0b0f11",
+                        "primary-container": "#e0f2fe",
+                        "tertiary": "#6b5f25",
+                        "surface-dim": "#d2dbe0",
+                        "outline-variant": "#e2e8f0",
+                        "secondary-container": "#f0fdfa",
+                        "on-background": "#2b3438",
+                        "on-secondary-fixed": "#0b4740",
+                        "primary-fixed": "#a4d8fc",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f7fafc",
+                        "primary-fixed-dim": "#96caed",
+                        "inverse-primary": "#a4d8fc",
+                        "on-primary-container": "#0369a1",
+                        "tertiary-fixed-dim": "#e9d791",
+                        "outline": "#94a3b8",
+                        "surface-container-highest": "#dbe4e9",
+                        "error": "#a83836",
+                        "on-secondary-container": "#134e4a",
+                        "tertiary-container": "#fef9c3",
+                        "on-error": "#fff7f6",
+                        "on-tertiary-fixed": "#4c4108",
+                        "on-tertiary": "#fff8eb",
+                        "tertiary-fixed": "#f7e59d",
+                        "secondary-fixed-dim": "#a8dfd4",
+                        "secondary": "#0d9488",
+                        "primary": "#0284c7",
+                        "surface-container-high": "#f1f5f9",
+                        "surface-tint": "#0284c7",
+                        "on-secondary-fixed-variant": "#2f645c",
+                        "on-surface-variant": "#64748b",
+                        "on-primary-fixed-variant": "#1b5674",
+                        "on-tertiary-fixed-variant": "#695d23",
+                        "primary-dim": "#075985",
+                        "surface": "#ffffff",
+                        "error-container": "#fee2e2",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#713f12",
+                        "on-primary-fixed": "#003851",
+                        "surface-variant": "#f1f5f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.75rem",
+                        "lg": "1.25rem",
+                        "xl": "2rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    },
+                    "boxShadow": {
+                        "soft": "0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)",
+                        "elegant": "0 10px 15px -3px rgb(0 0 0 / 0.04), 0 4px 6px -4px rgb(0 0 0 / 0.04)",
+                        "content": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-pill {
+            position: relative;
+        }
+        .active-nav-pill::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background-color: #0284c7;
+            border-radius: 0 4px 4px 0;
+        }
+        @keyframes custom-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        .animate-pulse-slow {
+            animation: custom-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc] font-body text-on-surface selection:bg-primary-container">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 flex justify-between items-center px-8 py-3.5">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold tracking-tight text-primary font-headline">PhysicsFlow</span>
+<div class="hidden md:flex gap-8 items-center h-full">
+<a class="text-primary font-bold border-b-2 border-primary h-full flex items-center pt-1 font-headline text-sm transition-all duration-200" href="#">Mechanics</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-semibold font-headline text-sm transition-all duration-200" href="#">Optics</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-semibold font-headline text-sm transition-all duration-200" href="#">Electromagnetism</a>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="p-2 hover:bg-slate-100 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-slate-500 text-[22px]">notifications</span>
+</div>
+<div class="p-2 hover:bg-slate-100 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-slate-500 text-[22px]">settings</span>
+</div>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<img alt="Student avatar" class="w-9 h-9 rounded-full ring-2 ring-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjYz6z5zrQ-enjhrgtYoTI7AKzpqNuBIhsy2IngGiE8IpkwuhfueR10h1OS0LxNqNbfDIoNv2gsksNslIAC-3EhmrH621c20rQMcus93hYdxKjF_XecqtJNOErKzG4V8JVFSQoxVW62UqPo4H3VmRslKeFcf9M65jNFumlskhzguqf4W2W3z4vyLcqdQz38fsqm7hp7W2Erjic4egpbtdMGm6zfY1UK3pqTMiiH-GVCxumYJvsp3yhEtBiY0B8mro6CnG7YxXFSLM"/>
+</div>
+</nav>
+<!-- Sticky Progress Bar -->
+<div class="fixed top-[65px] left-0 w-full z-40 h-1 bg-slate-100">
+<div class="h-full bg-primary w-2/3 transition-all duration-500 shadow-[0_0_8px_rgba(2,132,199,0.3)]"></div>
+</div>
+<div class="flex min-h-screen pt-[66px]">
+<!-- Side Navigation -->
+<aside class="h-[calc(100vh-66px)] w-64 sticky top-[66px] left-0 bg-white border-r border-slate-200 flex flex-col py-8 hidden lg:flex">
+<div class="px-6 mb-8">
+<h3 class="font-headline font-bold text-slate-900 text-base">Mechanics</h3>
+<p class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-1">Newtonian Physics</p>
+</div>
+<div class="flex flex-col px-3 space-y-1">
+<a class="group text-slate-600 px-4 py-2.5 hover:bg-slate-50 rounded-lg transition-all flex items-center gap-3 text-[14px] font-medium transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="active-nav-pill bg-sky-50 text-primary px-4 py-2.5 rounded-lg flex items-center gap-3 text-[14px] font-bold" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">architecture</span>
+<span>Mechanics</span>
+</a>
+<a class="group text-slate-600 px-4 py-2.5 hover:bg-slate-50 rounded-lg transition-all flex items-center gap-3 text-[14px] font-medium transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">light_mode</span>
+<span>Optics</span>
+</a>
+<a class="group text-slate-600 px-4 py-2.5 hover:bg-slate-50 rounded-lg transition-all flex items-center gap-3 text-[14px] font-medium transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">bolt</span>
+<span>Electromagnetism</span>
+</a>
+<a class="group text-slate-600 px-4 py-2.5 hover:bg-slate-50 rounded-lg transition-all flex items-center gap-3 text-[14px] font-medium transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">auto_graph</span>
+<span>My Progress</span>
+</a>
+</div>
+<div class="mt-auto px-6 py-6 border-t border-slate-100">
+<div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Daily Streak: 3 Days</p>
+<div class="flex gap-1.5">
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-slate-200 rounded-full"></div>
+<div class="h-1.5 flex-1 bg-slate-200 rounded-full"></div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 px-8 lg:px-16 py-10 max-w-5xl mx-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-6">
+<span>Unit 1</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span>Kinematics</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-primary">Projectile Motion</span>
+</nav>
+<!-- Hero Section -->
+<header class="mb-12 border-b border-slate-100 pb-12">
+<h1 class="text-4xl lg:text-5xl font-headline font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-6">
+                    Gravity's Arc: <span class="text-primary-dim">Projectile Motion</span>
+</h1>
+<p class="text-lg text-slate-500 max-w-2xl leading-relaxed font-body">
+                    Understanding how objects move through the air under the sole influence of gravity. It's the mathematics behind every basketball shot and soaring bird.
+                </p>
+</header>
+<!-- Main Content Card Wrapper -->
+<div class="space-y-12">
+<!-- Simple Explanation Box -->
+<section>
+<div class="bg-teal-50 border border-teal-100 p-8 rounded-lg shadow-sm">
+<div class="flex items-center gap-4 mb-4">
+<div class="p-2.5 bg-white rounded-lg shadow-elegant flex items-center justify-center">
+<span class="material-symbols-outlined text-teal-600 text-[20px]">tips_and_updates</span>
+</div>
+<h2 class="text-xl font-headline font-bold text-teal-900">The Simple Truth</h2>
+</div>
+<p class="text-base leading-relaxed text-teal-800 font-medium">
+                            Think of a ball thrown forward. While it travels forward at a steady speed, gravity is pulling it down faster and faster. The "arc" you see is just these two independent movements happening at the exact same time.
+                        </p>
+</div>
+</section>
+<!-- Real Life Example -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-6">
+<div class="order-2 md:order-1">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-md mb-6">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">sports_basketball</span>
+<span class="text-[10px] font-extrabold font-label tracking-widest uppercase">Real-World Case</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-slate-900 mb-5">The Perfect Jump Shot</h3>
+<p class="text-slate-500 leading-relaxed mb-8">
+                            When a basketball player shoots, the ball is a projectile. The horizontal distance to the hoop must perfectly match the vertical arc created by gravity to ensure the ball drops through the net.
+                        </p>
+<button class="bg-slate-900 text-white px-6 py-3 rounded-lg text-sm font-bold shadow-md hover:bg-slate-800 transition-all hover:-translate-y-0.5 active:translate-y-0 hover:-translate-y-0.5 active:scale-95 transition-all duration-200">
+                            Explore Vector Dynamics
+                        </button>
+</div>
+<div class="order-1 md:order-2">
+<div class="rounded-lg overflow-hidden shadow-elegant bg-slate-100 aspect-square relative group">
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500" data-alt="Close-up of a basketball at the peak of its arc" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbtSCEerEN4Ic_ZfYbHATuL41CKn07ek9k09DMMAmWnu_0fHkUL3BuQbHsNnqkwsViqG2vXkXWOThPaUtum2citu3-89XDetgLlKgPgH-DHSPuqnbWdQDV1Tclqe-7q0Jlw6IPRKzlyjRSXD4iwuiPNDCzsJRpbpNoaNfE8jJHo_4EOWSou8CD-an6MnjAwMimilo8zxxYGOcas7WCMcv8Gpwjulneyn92bnz4J-3CtM8z_Lyw5IPDZVY2TdGLpJd0Ht2UXf0DyYI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
+</div>
+</section>
+<!-- Diagram Placeholder -->
+<section class="py-12 px-8 bg-slate-50 border border-slate-100 rounded-lg text-center">
+<h4 class="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-8">Interactive Vector Laboratory</h4>
+<div class="max-w-xl mx-auto h-72 border border-slate-200 bg-white rounded-xl flex items-center justify-center shadow-content border-dashed relative">
+<div class="flex flex-col items-center gap-4 text-slate-400">
+<div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-2 animate-pulse-slow shadow-sm">
+<span class="material-symbols-outlined text-3xl">gesture</span>
+</div>
+<p class="font-semibold text-sm italic">Drag the launch angle to adjust trajectory</p>
+</div>
+</div>
+</section>
+<!-- Practice Questions -->
+<section class="pt-8">
+<div class="flex flex-col items-center mb-10">
+<div class="h-1 w-12 bg-primary/20 rounded-full mb-6"></div>
+<h3 class="text-2xl font-headline font-extrabold text-slate-900">Check Your Mastery</h3>
+</div>
+<div class="space-y-6 max-w-3xl mx-auto">
+<!-- Question 1 -->
+<div class="bg-white border border-slate-200 p-8 rounded-xl shadow-content hover:border-primary/30 transition-all transition-all duration-300">
+<div class="flex items-start gap-6">
+<div class="bg-sky-50 text-primary font-bold w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-sm">1</div>
+<div class="flex-1">
+<p class="text-lg font-body font-bold text-slate-800 mb-8">If you fire a bullet horizontally and drop one from the same height simultaneously, which hits the ground first?</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<button class="text-left px-5 py-4 rounded-lg border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-primary/50 transition-all text-sm font-semibold text-slate-600">The dropped bullet</button>
+<button class="text-left px-5 py-4 rounded-lg border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-primary/50 transition-all text-sm font-semibold text-slate-600">The fired bullet</button>
+<button class="text-left px-5 py-4 rounded-lg border border-primary bg-sky-50 text-primary transition-all text-sm font-bold ring-2 ring-primary/10">Both hit at the same time</button>
+<button class="text-left px-5 py-4 rounded-lg border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-primary/50 transition-all text-sm font-semibold text-slate-600">Depends on the wind speed</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Question 2 -->
+<div class="bg-white border border-slate-200 p-8 rounded-xl shadow-content hover:border-primary/30 transition-all transition-all duration-300">
+<div class="flex items-start gap-6">
+<div class="bg-sky-50 text-primary font-bold w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-sm">2</div>
+<div class="flex-1">
+<p class="text-lg font-body font-bold text-slate-800 mb-8">What is the only force acting on a projectile after launch (ignoring air resistance)?</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<button class="text-left px-5 py-4 rounded-lg border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-primary/50 transition-all text-sm font-semibold text-slate-600">Momentum</button>
+<button class="text-left px-5 py-4 rounded-lg border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-primary/50 transition-all text-sm font-semibold text-slate-600">Friction</button>
+<button class="text-left px-5 py-4 rounded-lg border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-primary/50 transition-all text-sm font-semibold text-slate-600">Gravity</button>
+<button class="text-left px-5 py-4 rounded-lg border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-primary/50 transition-all text-sm font-semibold text-slate-600">Inertia</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Navigation Footer -->
+<footer class="mt-20 flex justify-between items-center py-10 border-t border-slate-200">
+<button class="flex items-center gap-2 text-slate-500 text-sm font-bold hover:text-slate-900 transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    Previous: Displacement
+                </button>
+<div class="flex items-center gap-8">
+<div class="text-right hidden sm:block">
+<p class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Next Up</p>
+<p class="text-sm font-bold text-slate-900">Circular Motion</p>
+</div>
+<button class="bg-primary text-white px-8 py-3.5 rounded-lg font-bold shadow-soft hover:bg-primary-dim transition-all hover:shadow-elegant hover:-translate-y-0.5 active:scale-95 transition-all duration-200">
+                        Complete Lesson
+                    </button>
+</div>
+</footer>
+</main>
+</div>
+<!-- Floating AI Assistant / Tool -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="bg-slate-900 text-white w-14 h-14 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center justify-center group ring-4 ring-white">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform">rocket_launch</span>
+</button>
+</div>
+</body></html>

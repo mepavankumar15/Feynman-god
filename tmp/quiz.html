@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#b6eee2",
+                        "error-dim": "#67040d",
+                        "inverse-on-surface": "#9a9da0",
+                        "surface-container-low": "#eff4f8",
+                        "on-surface": "#2b3438",
+                        "background": "#f7fafc",
+                        "surface-container": "#e8eff3",
+                        "secondary-dim": "#255c53",
+                        "on-error-container": "#6e0a12",
+                        "tertiary-dim": "#5f531a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#0b0f11",
+                        "primary-container": "#a4d8fc",
+                        "tertiary": "#6b5f25",
+                        "surface-dim": "#d2dbe0",
+                        "outline-variant": "#aab3b8",
+                        "secondary-container": "#b6eee2",
+                        "on-background": "#2b3438",
+                        "on-secondary-fixed": "#0b4740",
+                        "primary-fixed": "#a4d8fc",
+                        "on-primary": "#f5f9ff",
+                        "surface-bright": "#f7fafc",
+                        "primary-fixed-dim": "#96caed",
+                        "inverse-primary": "#a4d8fc",
+                        "on-primary-container": "#0b4c6a",
+                        "tertiary-fixed-dim": "#e9d791",
+                        "outline": "#737c81",
+                        "surface-container-highest": "#dbe4e9",
+                        "error": "#a83836",
+                        "on-secondary-container": "#245a52",
+                        "tertiary-container": "#f7e59d",
+                        "on-error": "#fff7f6",
+                        "on-tertiary-fixed": "#4c4108",
+                        "on-tertiary": "#fff8eb",
+                        "tertiary-fixed": "#f7e59d",
+                        "secondary-fixed-dim": "#a8dfd4",
+                        "secondary": "#33685f",
+                        "primary": "#2d6583",
+                        "surface-container-high": "#e2e9ee",
+                        "surface-tint": "#2d6583",
+                        "on-secondary-fixed-variant": "#2f645c",
+                        "on-surface-variant": "#586065",
+                        "on-primary-fixed-variant": "#1b5674",
+                        "on-tertiary-fixed-variant": "#695d23",
+                        "primary-dim": "#1e5877",
+                        "surface": "#f7fafc",
+                        "error-container": "#fa746f",
+                        "on-secondary": "#e2fff8",
+                        "on-tertiary-container": "#5f531a",
+                        "on-primary-fixed": "#003851",
+                        "surface-variant": "#dbe4e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    }
+                },
+            },
+        }</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f7fafc;
+        }
+        .editorial-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* MCQ Option Micro-interactions */
+        .mcq-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .mcq-button:hover:not(.active) {
+            transform: translateY(-3px);
+            border-color: #2d6583;
+            background-color: #ffffff;
+            box-shadow: 0 10px 15px -3px rgba(45, 101, 131, 0.1), 0 4px 6px -4px rgba(45, 101, 131, 0.1);
+        }
+        
+        /* Button Feedback */
+        button:active {
+            transform: scale(0.95);
+        }
+        
+        /* Global Transitions */
+        button, a, input, .transition-all {
+            transition: all 0.2s ease-in-out !important;
+        }
+
+        /* Progress Bar Shimmer */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .progress-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+    </style>
+</head>
+<body class="text-on-surface bg-slate-50 min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white border-b border-slate-200 flex justify-between items-center px-8 py-3">
+<div class="flex items-center gap-10">
+<span class="text-xl font-extrabold tracking-tight text-primary font-['Plus_Jakarta_Sans']">PhysicsFlow</span>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-primary font-bold border-b-2 border-primary text-sm px-1 py-4 -mb-[13px]" href="#">Mechanics</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm font-semibold" href="#">Optics</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm font-semibold" href="#">Electromagnetism</a>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="bg-slate-100 border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 w-64 transition-all" placeholder="Search concepts..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-9 h-9 rounded-full overflow-hidden border border-slate-200">
+<img alt="Student avatar" data-alt="minimalist 3d character avatar of a young student with glasses smiling against a soft pastel blue background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNAvWuZLTsBZCPVT5ikwsGHSB58G_1iTGzI8LHO7jbIOCRpvy4J51YiDQ3Ug9oN9DXnyoOUz-N093RHnSMHptTHSbLWCvO-VoKg6tWerwSKg1m1HJbJPxRXYTb_0iuqVgmew227qQ0EQLvRT6tnroamsug0aUZh6zn6OPn086Mh7sm04JTthoPQ66m-ZFdXvVkxYKpqHlE8lVU4mkQSna0UY1a7vldAbRyV5gfbgs2Ys8zkvrglzelj8h7uLONQeupAnm45Kvf0a4"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Shell -->
+<main class="pt-24 pb-20 px-6 max-w-4xl mx-auto flex flex-col items-center">
+<!-- Progress Indicator - Refined for clarity -->
+<div class="w-full mb-10">
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-2">
+<span class="text-xs font-extrabold uppercase tracking-widest text-slate-400">Question 8 of 12</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-primary px-2 py-1 bg-primary/10 rounded">Mechanics</span>
+</div>
+</div>
+<div class="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[66%] rounded-full transition-all duration-700 ease-out progress-shimmer"></div>
+</div>
+</div>
+<!-- Quiz Card - Centered & Refined depth -->
+<div class="w-full bg-white rounded-3xl editorial-shadow border border-slate-100 p-8 md:p-14 relative">
+<div class="relative z-10">
+<!-- Concept Tag -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 bg-sky-50 text-sky-700 rounded-lg text-xs font-bold mb-8 border border-sky-100">
+<span class="material-symbols-outlined text-sm font-bold">lightbulb</span>
+<span class="uppercase tracking-wider">Conceptual Thinking</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-headline font-extrabold text-slate-800 leading-tight mb-10">
+                A ball is thrown vertically upward. At its maximum height, what can be said about its velocity and acceleration?
+            </h2>
+<!-- Answer Options - Modern MCQ style -->
+<div class="grid gap-4">
+<!-- Option A -->
+<button class="mcq-button group w-full flex items-center gap-5 p-5 rounded-2xl border-2 border-slate-100 text-left hover:shadow-sm">
+<div class="w-10 h-10 flex-shrink-0 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 font-bold flex items-center justify-center group-hover:bg-white group-hover:border-primary group-hover:text-primary transition-colors">
+                        A
+                    </div>
+<span class="text-lg font-medium text-slate-700 group-hover:text-slate-900 transition-colors">Velocity is zero, acceleration is zero.</span>
+</button>
+<!-- Option B: Active/Selected -->
+<button class="active w-full flex items-center gap-5 p-5 rounded-2xl border-2 border-primary bg-primary/5 text-left shadow-sm">
+<div class="w-10 h-10 flex-shrink-0 rounded-xl bg-primary text-white font-bold flex items-center justify-center">
+                        B
+                    </div>
+<span class="text-lg font-bold text-slate-900">Velocity is zero, acceleration is 9.8 m/s² downward.</span>
+</button>
+<!-- Option C -->
+<button class="mcq-button group w-full flex items-center gap-5 p-5 rounded-2xl border-2 border-slate-100 text-left hover:shadow-sm">
+<div class="w-10 h-10 flex-shrink-0 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 font-bold flex items-center justify-center group-hover:bg-white group-hover:border-primary group-hover:text-primary transition-colors">
+                        C
+                    </div>
+<span class="text-lg font-medium text-slate-700 group-hover:text-slate-900 transition-colors">Velocity is 9.8 m/s, acceleration is zero.</span>
+</button>
+<!-- Option D -->
+<button class="mcq-button group w-full flex items-center gap-5 p-5 rounded-2xl border-2 border-slate-100 text-left hover:shadow-sm">
+<div class="w-10 h-10 flex-shrink-0 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 font-bold flex items-center justify-center group-hover:bg-white group-hover:border-primary group-hover:text-primary transition-colors">
+                        D
+                    </div>
+<span class="text-lg font-medium text-slate-700 group-hover:text-slate-900 transition-colors">Both velocity and acceleration are 9.8 m/s².</span>
+</button>
+</div>
+<!-- Enhanced Feedback Area -->
+<div class="mt-10 p-6 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-start gap-4">
+<div class="w-10 h-10 flex-shrink-0 bg-emerald-500 rounded-full text-white flex items-center justify-center shadow-sm shadow-emerald-200">
+<span class="material-symbols-outlined">check</span>
+</div>
+<div>
+<h4 class="font-bold text-emerald-900 text-lg">Correct! Well done.</h4>
+<p class="text-emerald-800/80 mt-1 text-base leading-relaxed">
+                        Gravity is a constant force near Earth's surface. Even when the object momentarily stops moving at its peak, the pull of gravity continues to act on it at 9.8 m/s².
+                    </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Improved Navigation -->
+<div class="w-full mt-8 flex justify-between items-center px-2">
+<button class="group flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-all py-3">
+<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
+            Back
+        </button>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-slate-600 font-bold transition-all px-6 py-3">
+                Skip
+            </button>
+<button class="group px-8 py-3.5 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-[0.98] flex items-center gap-2">
+                Next Question
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Floating Quick Tip - Refined as a subtle sidebar -->
+<div class="hidden xl:block fixed right-10 bottom-10 w-72">
+<div class="bg-white p-6 rounded-2xl editorial-shadow border border-slate-100">
+<div class="flex items-center gap-2 text-primary font-extrabold mb-3">
+<span class="material-symbols-outlined text-lg">auto_awesome</span>
+<span class="text-xs uppercase tracking-widest">Study Tip</span>
+</div>
+<p class="text-sm text-slate-600 leading-relaxed italic">
+                "Remember that acceleration doesn't disappear just because something stops moving for a split second!"
+            </p>
+<div class="mt-4 flex items-center gap-3">
+<img alt="Physics robot" class="w-10 h-10 bg-slate-50 rounded-full border border-slate-100" data-alt="cute stylized 3d robot character with scientific gadgets in soft pastel colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyVJQ8ZYPdnlsgaYDCmeV6N1lnubt1fInTUPOO6UPAdYFyN0FkXseERwRcKLKFhgRztnHa-991_SwayYDlAxdUGTToG_5V2uhFsY1T5MiQ-SVD47ZF_zXuwI4SX8HCamNgBe5BhAszZr5bzncR__sBDfgBS6MLzSwpBj4sghZM9My1onR0byUvkp4iY8tJ5LJ7s1Ko8xHsRynxfwkExDnhtFbRdFr88JuEfIzsbG_L9RlzAH-IUrL-aofkQZDLZ40O2JgNuM-yQfY"/>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Powered by PhysicsAI</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Subtle backdrop decoration for focus -->
+<div class="fixed top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,#e2e8f0_0%,transparent_50%)] -z-10 pointer-events-none opacity-40"></div>
+</body></html>
