@@ -8,11 +8,13 @@ const Quiz = ({ questions, onComplete }) => {
 
   const question = questions[currentQ];
   const optionLetters = ['A', 'B', 'C', 'D'];
+  const questionText = question?.text || question?.q;
+  const correctAnswer = question?.correctIndex !== undefined ? question.correctIndex : question?.answer;
 
   const handleAnswer = (index) => {
     if (feedback !== null) return;
     
-    const isCorrect = index === question.answer;
+    const isCorrect = index === correctAnswer;
     setFeedback(isCorrect ? 'correct' : 'incorrect');
 
     if (isCorrect) {
@@ -59,13 +61,13 @@ const Quiz = ({ questions, onComplete }) => {
       
       <div className="relative z-10">
         <h2 className="text-2xl md:text-3xl font-headline font-extrabold text-slate-800 leading-tight mb-10">
-            {question.q}
+            {questionText}
         </h2>
         
         <div className="grid gap-4">
           {question.options.map((opt, idx) => {
-            let isSelectedAndCorrect = feedback !== null && idx === question.answer;
-            let isSelectedAndWrong = feedback === 'incorrect' && idx !== question.answer && feedback !== null; // To highlight wrong choice, actually we just highlight correct or let the button be locked
+            let isSelectedAndCorrect = feedback !== null && idx === correctAnswer;
+            let isSelectedAndWrong = feedback === 'incorrect' && idx !== correctAnswer && feedback !== null; 
             
             // To mimic the exact class styles
             let containerClass = "mcq-button group w-full flex items-center gap-5 p-5 rounded-2xl border-2 text-left ";
@@ -74,7 +76,7 @@ const Quiz = ({ questions, onComplete }) => {
             if (feedback === null) {
               containerClass += "border-slate-100 hover:shadow-sm";
               letterClass += "bg-slate-50 border border-slate-200 text-slate-500 group-hover:bg-white group-hover:border-primary group-hover:text-primary";
-            } else if (idx === question.answer) {
+            } else if (idx === correctAnswer) {
               // The correct answer always gets highlighted
               containerClass += "border-primary bg-primary/5 shadow-sm";
               letterClass += "bg-primary text-white";
@@ -93,7 +95,7 @@ const Quiz = ({ questions, onComplete }) => {
                 <div className={letterClass}>
                     {optionLetters[idx] || (idx+1)}
                 </div>
-                <span className={`text-lg font-medium transition-colors ${feedback !== null && idx === question.answer ? 'text-slate-900 font-bold' : 'text-slate-700 group-hover:text-slate-900'}`}>{opt}</span>
+                <span className={`text-lg font-medium transition-colors ${feedback !== null && idx === correctAnswer ? 'text-slate-900 font-bold' : 'text-slate-700 group-hover:text-slate-900'}`}>{opt}</span>
               </button>
             );
           })}
@@ -108,7 +110,7 @@ const Quiz = ({ questions, onComplete }) => {
                 <div>
                     <h4 className={`font-bold text-lg ${feedback === 'correct' ? 'text-emerald-900' : 'text-red-900'}`}>{feedback === 'correct' ? 'Correct! Well done.' : 'Not quite right.'}</h4>
                     <p className={`mt-1 text-base leading-relaxed ${feedback === 'correct' ? 'text-emerald-800/80' : 'text-red-800/80'}`}>
-                       {feedback === 'correct' ? 'You successfully identified the correct answer.' : 'Review the concepts and try again!'}
+                       {question.explanation || (feedback === 'correct' ? 'You successfully identified the correct answer.' : 'Review the concepts and try again!')}
                     </p>
                 </div>
              </div>
