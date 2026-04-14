@@ -9,7 +9,7 @@ const TopNavBar = () => {
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <span className="material-symbols-outlined text-white text-xl">science</span>
           </div>
-          <span className="text-xl font-extrabold tracking-tight text-slate-900 font-headline">PhysicsFlow</span>
+          <span className="text-xl font-extrabold tracking-tight text-slate-900 font-headline">PhysicsGod</span>
         </div>
         
         <div className="hidden md:flex items-center gap-1">
