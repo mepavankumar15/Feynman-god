@@ -1,14 +1,50 @@
 import React from 'react';
 import { Illustration } from './SvgIllustrations';
 
+const getCaption = (type, title) => {
+  const captions = {
+    'momentum': 'Tracking the center of mass and continuous transfer of velocity.',
+    'buoyancy': 'Observing the displacement of fluid causing an upward lift force.',
+    'friction': 'Notice how the microscopic contact points resist sheer velocity.',
+    'ruler': 'Establishing a standardized scale to measure scalar magnitude objectively.',
+    'units': 'Establishing a standardized scale to measure scalar magnitude objectively.',
+    'atom-model': 'Defining the foundational building blocks of the physical model.',
+    'physics': 'Defining the foundational building blocks of the physical model.',
+    'displacement-arrow': 'Tracking the strict linear vector from origin to destination.',
+    'displacement': 'Tracking the strict linear vector from origin to destination.',
+    'speedometer': 'Measuring the instantaneous rate of distance closure over active time.',
+    'speed': 'Measuring the instantaneous rate of distance closure over active time.',
+    'motion-graph': 'Plotting the temporal rate of change on a rigid coordinate plane.',
+    'graphs': 'Plotting the temporal rate of change on a rigid coordinate plane.',
+    'circuit-flow': 'Observing the closed-loop transfer of continuous electrical energy.',
+    'circuit': 'Observing the closed-loop transfer of continuous electrical energy.',
+    'car-motion': 'Visualizing bulk macroscopic translation along a 1D reference plane.',
+    'motion': 'Visualizing bulk macroscopic translation along a 1D reference plane.',
+    'galaxy-orbit': 'Examining cosmic-scale forces dictated entirely by inverse-square laws.',
+    'thermometer': 'Tracking the invisible kinetic energy of molecules as scalar heat.',
+    'math-symbols': 'Translating complex physical realities into strict algebraic equations.',
+    'triangle-angles': 'Deconstructing an angled vector into independent orthogonal axes.',
+    'coordinate-system': 'Isolating the object in a standardized reference frame to sum forces.',
+    'clock-time': 'Using the localized passage of time to calculate strict rates of physical processes.',
+    'brain-think': 'Applying analytical logic and abstraction to isolate the correct parameters.',
+    'experiment-setup': 'Testing the hypothesis by isolating the target variable in a closed system.',
+    'trajectory-arc': 'Tracing the continuous parabolic path continuously dictated by constant gravity.',
+    'circular-orbit': 'Visualizing the perpendicular centripetal force continuously changing the velocity vector.',
+    'force': 'Representing the physical push or pull interaction changing the momentum constraints.'
+  };
+  return captions[type] || `Visual Demonstration: Analyzing the mechanics of ${title}.`;
+};
+
 const InteractiveDiagram = ({ visualType, title }) => {
   return (
-    <section className="py-12 px-8 bg-slate-50 border border-slate-100 rounded-lg text-center">
-      <h4 className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-8">Interactive Vector Laboratory</h4>
-      <div className="w-full h-72 border border-slate-200 bg-white rounded-xl flex items-center justify-center flex-col relative overflow-hidden shadow-sm">
-         <Illustration type={visualType} />
-         <div className="absolute bottom-4 left-0 w-full text-center">
-             <p className="font-semibold text-sm italic text-slate-400">Visual Demonstration of {title}</p>
+    <section className="py-12 px-4 sm:px-8 bg-slate-50 border border-slate-100 rounded-lg text-center shadow-inner">
+      <h4 className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-8 w-full">Interactive Vector Laboratory</h4>
+      <div className="w-full h-80 border border-slate-200 bg-white rounded-xl flex flex-col items-center justify-center relative overflow-hidden shadow-sm">
+         <div className="flex-1 flex items-center justify-center w-full pb-8">
+            <Illustration type={visualType} />
+         </div>
+         <div className="absolute bottom-0 left-0 w-full bg-slate-100/80 backdrop-blur-sm border-t border-slate-200 px-4 py-3 text-center">
+             <p className="font-semibold text-[13px] text-slate-600 leading-snug">{getCaption(visualType, title)}</p>
          </div>
       </div>
     </section>
