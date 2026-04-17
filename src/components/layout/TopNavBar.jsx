@@ -78,8 +78,18 @@ const TopNavBar = ({ toggleMobileMenu }) => {
           >
             Dashboard
           </NavLink>
-          <a className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 rounded-md transition-all duration-300 ease-in-out active:scale-[0.98]" href="#">Courses</a>
-          <a className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 rounded-md transition-all duration-300 ease-in-out active:scale-[0.98]" href="#">Experiments</a>
+          <NavLink 
+            to="/courses" 
+            className={({isActive}) => `px-4 py-2 text-sm font-semibold rounded-md transition-all duration-300 ease-in-out active:scale-[0.98] ${isActive ? 'text-primary bg-primary-container' : 'text-slate-600 hover:bg-slate-50'}`}
+          >
+            Courses
+          </NavLink>
+          <NavLink 
+            to="/sandbox" 
+            className={({isActive}) => `px-4 py-2 text-sm font-semibold rounded-md transition-all duration-300 ease-in-out active:scale-[0.98] ${isActive ? 'text-primary bg-primary-container' : 'text-slate-600 hover:bg-slate-50'}`}
+          >
+            Experiments
+          </NavLink>
         </div>
       </div>
       
