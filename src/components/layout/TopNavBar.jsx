@@ -52,7 +52,7 @@ const TopNavBar = ({ toggleMobileMenu }) => {
   const handleLessonSelect = (topicId, lessonId) => {
     setIsSearchOpen(false);
     setSearchQuery('');
-    navigate(`/topic/${topicId}/lesson/${lessonId}`);
+    navigate(`/lesson/${topicId}/${lessonId}`);
   };
 
   return (

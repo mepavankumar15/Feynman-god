@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Lesson from './pages/Lesson';
 import Topic from './pages/Topic';
 import Sandbox from './pages/Sandbox';
+import Courses from './pages/Courses';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
           <Route path="/sandbox" element={<Sandbox />} />
           <Route path="/topic/:topicId" element={<Topic />} />
           <Route path="/lesson/:topicId/:lessonId" element={<Lesson />} />
