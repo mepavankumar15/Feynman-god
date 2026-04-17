@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Illustration = ({ type }) => {
+export const Illustration = ({ type, val1 = 50, val2 = 50 }) => {
   switch (type) {
     case 'units':
       return (
@@ -116,15 +116,17 @@ export const Illustration = ({ type }) => {
         </svg>
       );
     case 'force':
+      const boxSpeed = 4.5 - (val1 / 100) * 4;
+      const roughness = 20 - (val2 / 100) * 15;
       return (
         <svg viewBox="0 0 200 100" className="w-full max-w-sm mx-auto my-6">
-          <rect x="80" y="30" width="40" height="40" fill="#f59e0b" />
+          <rect x="0" y="70" width="200" height="2" fill="#cbd5e1" strokeDasharray={`${roughness} ${roughness}`} style={{ transition: 'stroke-dasharray 0.5s' }} />
           <g>
-            <line x1="20" y1="50" x2="65" y2="50" stroke="#ef4444" strokeWidth="6" />
-            <polygon points="65,40 80,50 65,60" fill="#ef4444" />
-            <animateTransform attributeName="transform" type="translate" values="-10,0; 10,0; -10,0" dur="2s" repeatCount="indefinite" />
+            <rect x="50" y="30" width="40" height="40" fill="#3b82f6" rx="4" />
+            <path d="M 10 50 L 40 50 M 30 40 L 40 50 L 30 60" fill="none" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            <animateTransform attributeName="transform" type="translate" values="0,0; 50,0; 0,0" dur={`${boxSpeed}s`} repeatCount="indefinite" />
           </g>
-          <text x="35" y="30" fill="#ef4444" fontSize="14" fontWeight="bold">Push Force</text>
+          <text x="70" y="55" fill="white" fontSize="12" fontWeight="bold" textAnchor="middle">F</text>
         </svg>
       );
     case 'friction':
@@ -165,18 +167,20 @@ export const Illustration = ({ type }) => {
         </svg>
       );
     case 'momentum':
+      const r1 = 8 + (val1 / 100) * 12;
+      const r2 = 8 + (val2 / 100) * 12;
       return (
         <svg viewBox="0 0 200 100" className="w-full max-w-sm mx-auto my-6">
           <rect x="0" y="75" width="200" height="4" fill="#cbd5e1" />
           <g>
-            <circle cx="50" cy="60" r="15" fill="#3b82f6" />
-            <text x="50" y="64" fill="white" fontSize="10" fontWeight="bold" textAnchor="middle">5kg</text>
-            <animateTransform attributeName="transform" type="translate" values="0,0; 50,0; 50,0;" dur="3s" repeatCount="indefinite" />
+            <circle cx="50" cy={75-r1} r={r1} fill="#3b82f6" />
+            <text x="50" y={75-r1+3} fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">{val1}kg</text>
+            <animateTransform attributeName="transform" type="translate" values="0,0; 30,0; 30,0;" dur="3s" repeatCount="indefinite" />
           </g>
           <g>
-            <circle cx="140" cy="60" r="15" fill="#ef4444" />
-            <text x="140" y="64" fill="white" fontSize="10" fontWeight="bold" textAnchor="middle">3kg</text>
-            <animateTransform attributeName="transform" type="translate" values="0,0; 0,0; 30,0;" dur="3s" repeatCount="indefinite" />
+            <circle cx="110" cy={75-r2} r={r2} fill="#ef4444" />
+            <text x="110" y={75-r2+3} fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">{val2}kg</text>
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,0; 40,0;" dur="3s" repeatCount="indefinite" />
           </g>
         </svg>
       );
@@ -415,13 +419,16 @@ export const Illustration = ({ type }) => {
       );
     case 'speedometer':
     case 'speed':
+      const speedRotDur = 4.5 - (val2 / 100) * 3;
+      const speedArcDash = (val1 / 100) * 125.6;
+      const speedAngle = (val1 / 100) * 270;
       return (
         <svg viewBox="0 0 200 100" className="w-full max-w-sm mx-auto my-6">
           <circle cx="100" cy="55" r="40" fill="none" stroke="#e2e8f0" strokeWidth="6" />
-          <circle cx="100" cy="55" r="40" fill="none" stroke="#3b82f6" strokeWidth="6" strokeDasharray="125.6 125.6" strokeDashoffset="40" strokeLinecap="round" />
+          <circle cx="100" cy="55" r="40" fill="none" stroke="#3b82f6" strokeWidth="6" strokeDasharray="125.6 125.6" strokeDashoffset={125.6 - speedArcDash} strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.5s ease' }} />
           <g>
             <line x1="100" y1="55" x2="100" y2="25" stroke="#1e293b" strokeWidth="3" strokeLinecap="round" />
-            <animateTransform attributeName="transform" type="rotate" from="0 100 55" to="360 100 55" dur="3s" repeatCount="indefinite" />
+            <animateTransform attributeName="transform" type="rotate" from="0 100 55" to={`${speedAngle} 100 55`} dur={`${speedRotDur}s`} repeatCount="indefinite" />
           </g>
           <circle cx="100" cy="55" r="4" fill="#1e293b" />
           <text x="100" y="12" fill="#3b82f6" fontSize="11" fontWeight="bold" textAnchor="middle">km/h</text>
@@ -584,30 +591,36 @@ export const Illustration = ({ type }) => {
         </svg>
       );
     case 'trajectory-arc':
+      const trajDurSecs = 4.5 - (val1 / 100) * 3;
+      const arcDepth = -10 - (val2 / 100) * 70;
+      const trajPath = `M 0 0 Q 70 ${arcDepth}, 140 0`;
+      const bgPath = `M 30 80 Q 100 ${(80+arcDepth)}, 170 80`;
       return (
         <svg viewBox="0 0 200 100" className="w-full max-w-sm mx-auto my-6">
           <line x1="20" y1="80" x2="180" y2="80" stroke="#475569" strokeWidth="2" />
-          <path d="M 30 80 Q 100 0, 170 80" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
+          <path d={bgPath} fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" style={{ transition: 'd 0.5s ease' }} />
           <g>
             <circle cx="30" cy="80" r="5" fill="#f59e0b" />
-            <animateMotion path="M 0 0 Q 70 -80, 140 0" dur="2.5s" repeatCount="indefinite" />
+            <animateMotion path={trajPath} dur={`${trajDurSecs}s`} repeatCount="indefinite" />
           </g>
           <line x1="100" y1="40" x2="100" y2="40" stroke="none" />
         </svg>
       );
     case 'circular-orbit':
+      const orbitSpeed = 4.5 - (val1 / 100) * 4;
+      const orbitRadius = 10 + (val2 / 100) * 35;
       return (
         <svg viewBox="0 0 200 100" className="w-full max-w-sm mx-auto my-6">
-          <circle cx="100" cy="50" r="30" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="4,4" />
+          <circle cx="100" cy="50" r={orbitRadius} fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="4,4" style={{ transition: 'r 0.5s ease' }} />
           <circle cx="100" cy="50" r="5" fill="#475569" />
           <g>
-            <line x1="100" y1="50" x2="100" y2="20" stroke="#3b82f6" strokeWidth="2" />
-            <circle cx="100" cy="20" r="6" fill="#ef4444" />
-            <line x1="100" y1="20" x2="130" y2="20" stroke="#22c55e" strokeWidth="2" />
-            <polygon points="130,20 120,16 120,24" fill="#22c55e" />
-            <animateTransform attributeName="transform" type="rotate" from="0 100 50" to="360 100 50" dur="3s" repeatCount="indefinite" />
+            <line x1="100" y1="50" x2="100" y2={50 - orbitRadius} stroke="#3b82f6" strokeWidth="2" />
+            <circle cx="100" cy={50 - orbitRadius} r="6" fill="#ef4444" />
+            <line x1="100" y1={50 - orbitRadius} x2="130" y2={50 - orbitRadius} stroke="#22c55e" strokeWidth="2" />
+            <polygon points={`130,${50-orbitRadius} 120,${46-orbitRadius} 120,${54-orbitRadius}`} fill="#22c55e" />
+            <animateTransform attributeName="transform" type="rotate" from="0 100 50" to="360 100 50" dur={`${orbitSpeed}s`} repeatCount="indefinite" />
           </g>
-          <text x="140" y="30" fill="#22c55e" fontSize="10">v</text>
+          <text x="140" y={60 - orbitRadius} fill="#22c55e" fontSize="10">v</text>
         </svg>
       );
     default:
