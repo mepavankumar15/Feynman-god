@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Lesson from './pages/Lesson';
@@ -8,17 +9,19 @@ import Courses from './pages/Courses';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/sandbox" element={<Sandbox />} />
-          <Route path="/topic/:topicId" element={<Topic />} />
-          <Route path="/lesson/:topicId/:lessonId" element={<Lesson />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/sandbox" element={<Sandbox />} />
+            <Route path="/topic/:topicId" element={<Topic />} />
+            <Route path="/lesson/:topicId/:lessonId" element={<Lesson />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import data from '../../data/topics.json';
+import { useAuth } from '../../contexts/AuthContext';
+import AuthModal from '../auth/AuthModal';
 
 const TopNavBar = ({ toggleMobileMenu }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -8,12 +10,27 @@ const TopNavBar = ({ toggleMobileMenu }) => {
   const [searchResults, setSearchResults] = useState([]);
   const searchRef = useRef(null);
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const profileRef = useRef(null);
 
   // Handle click outside to close
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setIsSearchOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Handle click outside profile dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -148,14 +165,48 @@ const TopNavBar = ({ toggleMobileMenu }) => {
           </button>
         )}
 
-        <button className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg relative transition-all duration-300 ease-in-out active:scale-[0.98]">
-          <span className="material-symbols-outlined">notifications</span>
-          <span className="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
-        </button>
-        <div className="h-9 w-9 rounded-full ring-2 ring-slate-100 overflow-hidden ml-2 cursor-pointer">
-          <img alt="Student avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1mUjW4-QMPBOBpeOgkJFpMWxDpZvoSJZg16a38TTEyuvIycdbvNlThbAGdigKyCFb3iNsVoywwe7af45lTd_nAYsPIoHvc1EK4aSrnjW3LOrryoAHncmNoY6jTa5bw2lTfkof7CMYqdqTrL6ZPT8Y4ZO7r8ewIsKUgrk_hmKRL0Xu6DffpoxHbvmqvzEuWecqkapFP7BLqsnH1NIG733MiURtjQlQrFXS6-3sLi7hHfJQ7G2Eoqi1BqYPmp5_lLmNWQx4_ApQ1j8"/>
-        </div>
+        {/* Auth Section */}
+        {user ? (
+          <div className="relative" ref={profileRef}>
+            <button 
+              onClick={() => setIsProfileOpen(!isProfileOpen)}
+              className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 hover:bg-primary/20 rounded-lg transition-all"
+            >
+              <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
+                <span className="text-white text-xs font-bold">{user.email?.charAt(0).toUpperCase()}</span>
+              </div>
+              <span className="text-sm font-semibold text-slate-700 hidden sm:block max-w-[120px] truncate">{user.email?.split('@')[0]}</span>
+              <span className="material-symbols-outlined text-slate-400 text-[16px]">expand_more</span>
+            </button>
+
+            {isProfileOpen && (
+              <div className="absolute right-0 top-12 w-56 bg-white border border-slate-100 rounded-xl shadow-xl overflow-hidden z-50">
+                <div className="px-4 py-3 border-b border-slate-100 bg-slate-50/50">
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Signed in as</p>
+                  <p className="text-sm font-semibold text-slate-800 truncate mt-0.5">{user.email}</p>
+                </div>
+                <button 
+                  onClick={async () => { await signOut(); setIsProfileOpen(false); }}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-red-500 hover:bg-red-50 transition-colors"
+                >
+                  <span className="material-symbols-outlined text-[18px]">logout</span>
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button 
+            onClick={() => setIsAuthOpen(true)}
+            className="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-all active:scale-[0.98] flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-[18px]">login</span>
+            <span className="hidden sm:inline">Sign In</span>
+          </button>
+        )}
       </div>
+
+      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
     </nav>
   );
 };
