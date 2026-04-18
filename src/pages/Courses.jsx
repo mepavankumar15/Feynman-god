@@ -8,6 +8,8 @@ const phases = [
   { name: "Phase 3: Forces & Dynamics", range: [17, 24], color: "from-emerald-500 to-teal-600" },
   { name: "Phase 4: Energy & Momentum", range: [25, 30], color: "from-amber-500 to-orange-600" },
   { name: "Phase 5: Rotation & Gravity", range: [31, 35], color: "from-violet-500 to-purple-600" },
+  { name: "Phase 6: Waves & Thermodynamics", range: [36, 40], color: "from-cyan-500 to-teal-600" },
+  { name: "Phase 7: Electricity & Optics", range: [41, 45], color: "from-rose-500 to-fuchsia-600" },
 ];
 
 const Courses = () => {
