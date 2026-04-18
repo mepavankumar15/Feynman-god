@@ -160,24 +160,24 @@ const Sandbox = () => {
       <div className="relative flex-1 bg-slate-50 border-2 border-slate-200 rounded-2xl shadow-inner overflow-hidden flex flex-col">
         
         {/* Floating Tool Palette Overlay */}
-        <div className="absolute top-4 left-4 z-10 flex gap-2">
+        <div className="absolute top-4 left-4 right-16 z-10 flex flex-wrap gap-2">
            <button 
              onClick={addBox}
-             className="px-4 py-2 bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm rounded-lg text-sm font-bold text-slate-700 hover:text-primary transition-all active:scale-95 flex items-center gap-2"
+             className="px-3 py-2 sm:px-4 bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm rounded-lg text-sm font-bold text-slate-700 hover:text-primary transition-all active:scale-95 flex items-center gap-2"
            >
-             <span className="material-symbols-outlined text-[18px]">crop_square</span> Blue Box
+             <span className="material-symbols-outlined text-[18px]">crop_square</span> <span className="hidden sm:inline">Blue Box</span>
            </button>
            <button 
              onClick={addBoulder}
-             className="px-4 py-2 bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm rounded-lg text-sm font-bold text-slate-700 hover:text-amber-500 transition-all active:scale-95 flex items-center gap-2"
+             className="px-3 py-2 sm:px-4 bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm rounded-lg text-sm font-bold text-slate-700 hover:text-amber-500 transition-all active:scale-95 flex items-center gap-2"
            >
-             <span className="material-symbols-outlined text-[18px]">radio_button_unchecked</span> Heavy Boulder
+             <span className="material-symbols-outlined text-[18px]">radio_button_unchecked</span> <span className="hidden sm:inline">Heavy Boulder</span>
            </button>
            <button 
              onClick={toggleGravity}
-             className="px-4 py-2 bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm rounded-lg text-sm font-bold text-slate-700 hover:text-emerald-500 transition-all active:scale-95 flex items-center gap-2"
+             className="px-3 py-2 sm:px-4 bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm rounded-lg text-sm font-bold text-slate-700 hover:text-emerald-500 transition-all active:scale-95 flex items-center gap-2"
            >
-             <span className="material-symbols-outlined text-[18px]">swap_vert</span> Toggle Gravity
+             <span className="material-symbols-outlined text-[18px]">swap_vert</span> <span className="hidden sm:inline">Toggle Gravity</span>
            </button>
         </div>
 

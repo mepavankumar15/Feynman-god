@@ -96,12 +96,12 @@ const TopNavBar = ({ toggleMobileMenu }) => {
       <div className="flex items-center gap-3 relative" ref={searchRef}>
         
         {/* Search Input (conditionally expanded) */}
-        <div className={`transition-all duration-300 origin-right ${isSearchOpen ? 'w-64 sm:w-80 opacity-100 scale-100' : 'w-0 opacity-0 scale-95 overflow-hidden'}`}>
+        <div className={`transition-all duration-300 origin-right absolute sm:static right-0 top-1/2 sm:top-auto -translate-y-1/2 sm:translate-y-0 px-2 sm:px-0 bg-white sm:bg-transparent ${isSearchOpen ? 'w-[calc(100vw-32px)] sm:w-80 opacity-100 scale-100' : 'w-0 opacity-0 scale-95 overflow-hidden'} z-10`}>
            <div className="relative flex items-center">
               <span className="material-symbols-outlined absolute left-3 flex items-center justify-center text-slate-400 text-sm">search</span>
               <input 
                 type="text" 
-                placeholder="Search 260 lessons..."
+                placeholder="Search 410 lessons..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus={isSearchOpen}

@@ -38,7 +38,25 @@ const SideNavBar = ({ isOpen, closeMenu }) => {
           className={({ isActive }) => `flex items-center gap-3 px-3 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ease-in-out active:scale-[0.98] ${isActive ? 'text-primary bg-primary-container' : 'text-slate-600 hover:bg-slate-50 group'}`}
         >
           <span className="material-symbols-outlined text-[22px]" style={{ fontVariationSettings: "'FILL' 1" }}>grid_view</span>
-          <span>Overview</span>
+          <span>Dashboard</span>
+        </NavLink>
+
+        <NavLink
+          to="/courses"
+          onClick={closeMenu}
+          className={({ isActive }) => `flex items-center gap-3 px-3 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ease-in-out active:scale-[0.98] ${isActive ? 'text-primary bg-primary-container' : 'text-slate-600 hover:bg-slate-50 group'}`}
+        >
+          <span className="material-symbols-outlined text-[22px]" style={{ fontVariationSettings: "'FILL' 1" }}>library_books</span>
+          <span>All Courses</span>
+        </NavLink>
+
+        <NavLink
+          to="/sandbox"
+          onClick={closeMenu}
+          className={({ isActive }) => `flex items-center gap-3 px-3 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ease-in-out active:scale-[0.98] ${isActive ? 'text-primary bg-primary-container' : 'text-slate-600 hover:bg-slate-50 group'}`}
+        >
+          <span className="material-symbols-outlined text-[22px]" style={{ fontVariationSettings: "'FILL' 1" }}>architecture</span>
+          <span>Experiments</span>
         </NavLink>
 
         {data.topics.map(topic => (
